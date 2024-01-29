@@ -10,9 +10,9 @@ import collections
 import sys
 import traceback
 
-from . import sfeSpiWrapper
-from . import sparkfun_predefines as sp
-from . import core
+import sfeSpiWrapper
+import sparkfun_predefines as sp
+import core
 
 _DEFAULT_NAME = "Qwiic GPS"
 _AVAILABLE_I2C_ADDRESS = [0x42]

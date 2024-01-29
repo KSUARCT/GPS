@@ -12,8 +12,8 @@ def run():
     while True:
       try: 
         coords = gps.geo_coords()
-        lon = coords.lon
-        lat = coords.lat
+        lon = gps.lon
+        lat = gps.lat
         print(lon,lat)
       except (ValueError, IOError) as err:
         print(err)

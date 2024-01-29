@@ -1,5 +1,6 @@
 import struct
 import serial
+import spidev
 
 import threading
 import time

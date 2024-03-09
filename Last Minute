@@ -1,0 +1,45 @@
+import serial
+import time
+import os
+
+def main():
+    # Serial port configuration
+    serial_port = '/dev/ttyUSB0'  # Adjust this to match your GNSS receiver's serial port
+    baud_rate = 9600  # Adjust this to match your GNSS receiver's baud rate
+
+    # Open serial port
+    try:
+        ser = serial.Serial(serial_port, baud_rate, timeout=1)
+        print("Serial port opened successfully")
+    except serial.SerialException as e:
+        print("Error opening serial port:", e)
+        return
+
+    try:
+        while True:
+            # Read a line of data from the serial port
+            line = ser.readline().decode().strip()
+
+            # Check if the line contains position data
+            if line.startswith('$GNGGA'):
+                data = line.split(',')
+                if len(data) >= 10:
+                    # Extract latitude and longitude
+                    latitude = data[2]
+                    longitude = data[4]
+
+                    # Print latitude and longitude
+                    print("Latitude:", latitude)
+                    print("Longitude:", longitude)
+
+            # Wait for a moment before reading the next line
+            time.sleep(1)
+
+    except KeyboardInterrupt:
+        print("Exiting program")
+    finally:
+        # Close serial port
+        ser.close()
+
+if __name__ == "__main__":
+    main()
